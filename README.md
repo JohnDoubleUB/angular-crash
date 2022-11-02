@@ -178,3 +178,5 @@ add:
 that will essentially be our database server (for testing these things atleast)
 
 Then we just need to create this file
+
+Now to run it we just call (because we called it "server" in scripts): npm run server
