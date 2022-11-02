@@ -4,8 +4,8 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http'; 
 
 import { Task } from '../Task';
-import { TASKS } from '../mock-tasks';
-import { Observable, of } from 'rxjs'; //Adding observables
+import { TASKS } from '../mock-tasks'; //We don't need this anymore for testing
+import { Observable, of } from 'rxjs'; //Adding observables, we also don't neccesarily need of as we aren't faking the data now
 
 
 @Injectable({
