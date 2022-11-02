@@ -204,6 +204,7 @@ This is where all our components are also registered, one unified place, which i
     import { HttpClientModule } from '@angular/common/http'; //We add this so we can do the http client stuff in our project
 
 then make sure to include that in the imports with our other stuff:
+    
     @NgModule({
     declarations: [
         AppComponent,
@@ -223,6 +224,7 @@ then make sure to include that in the imports with our other stuff:
     export class AppModule { }
 
 Then in the service itself we just need to make sure we know the url for the api and then also inject the httpClient into the constructor as seen below:
+
     export class TaskService {
     private apiUrl = "http://localhost:5000/tasks"; //Self explanatory but this is where the database is running
     
