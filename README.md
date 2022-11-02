@@ -164,6 +164,7 @@ install using: npm install -g json-server
 
 then create some data db.json
 example file is:
+
     {
     "posts": [
         { "id": 1, "title": "json-server", "author": "typicode" }
@@ -177,6 +178,7 @@ example file is:
 and then start the server using: json-server --watch db.json
 
 Now if you go to http://localhost:3000/posts/1, you'll get
+
     { "id": 1, "title": "json-server", "author": "typicode" }
 
 All the info is on the link for the package, but then you can make GET, POST, PUT, PATCH and DELETE requests for this data
