@@ -78,6 +78,13 @@ where btnClick is defined inside app-button component as:
 which can then be called somewhere using
     this.btnClick.emit();
 
+### For this project to work:
+please run both commands:
+    ng serve
+    npm run server
+
+This will ensure that both the site is running and the mock server for it
+
 ### Useful commands
 
 #### Create a new component:
