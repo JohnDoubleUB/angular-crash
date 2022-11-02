@@ -180,3 +180,49 @@ that will essentially be our database server (for testing these things atleast)
 Then we just need to create this file
 
 Now to run it we just call (because we called it "server" in scripts): npm run server
+
+### Switching to the httpclient to use this mock server
+So angular actually has its own httpclient, so we'll use that
+    import {HttpClient, HttpHeaders} from '@angular/common/http';
+
+This will allow us to make our requests
+
+We will also have to add this to our component as a module so we can use it
+    app.module.ts
+
+This is where all our components are also registered, one unified place, which is also why we don't have to do as much importing as in React
+    import { HttpClientModule } from '@angular/common/http'; //We add this so we can do the http client stuff in our project
+
+then make sure to include that in the imports with our other stuff:
+    @NgModule({
+    declarations: [
+        AppComponent,
+        HeaderComponent,
+        ButtonComponent,
+        TasksComponent,
+        TaskItemComponent
+    ],
+    imports: [
+        BrowserModule,
+        FontAwesomeModule,
+        HttpClientModule //Here it is added to this too!
+    ],
+    providers: [],
+    bootstrap: [AppComponent]
+    })
+    export class AppModule { }
+
+Then in the service itself we just need to make sure we know the url for the api and then also inject the httpClient into the constructor as seen below:
+    export class TaskService {
+    private apiUrl = "http://localhost:5000/tasks"; //Self explanatory but this is where the database is running
+    
+    constructor(private http: HttpClient) { } //Then make sure to include it in the constructor for the service
+
+    getTasks(): Observable<Task[]>
+    {
+        //return TASKS; //Error because this isn't an observable
+        // const tasks = of(TASKS); //We are changing this again to allow us to use the fake server
+        // return tasks;
+        //Added triangle brackets to fix the issue with the returned type not being of Task
+        return this.http.get<Task[]>(this.apiUrl); //This is the new line that actually gets data from the server
+    }
