@@ -1,0 +1,5 @@
+<!--[] denote directives -->
+<!-- adding events is like this: inside tag <(click)="onClick"> the quotations mark an event name that then needs to exist-->
+<button [ngStyle]="{'background-color' : color}" class="btn" (click)="onClick()">
+    {{ text }}
+</button>

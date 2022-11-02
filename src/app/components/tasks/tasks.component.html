@@ -1,0 +1,10 @@
+<!-- 
+    Cool directive for angular! 
+    which lets you loop over items inline and create tags like so 
+    *ngFor="let task of tasks"
+    'let' and 'of' being key words for the operation
+    We aren't going to use this line however, we want to have a component for this
+-->
+<!-- <p *ngFor="let task of tasks">{{task.text}}</p> -->
+<!-- This is what we'll be doing instead-->
+<app-task-item *ngFor="let task of tasks" [task]="task"></app-task-item> 
