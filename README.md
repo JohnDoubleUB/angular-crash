@@ -171,3 +171,10 @@ Now if you go to http://localhost:3000/posts/1, you'll get
 
 All the info is on the link for the package, but then you can make GET, POST, PUT, PATCH and DELETE requests for this data
 
+Under package.json "scripts":
+add:
+    "server": "json-server --watch db.json --port 5000"
+
+that will essentially be our database server (for testing these things atleast)
+
+Then we just need to create this file
