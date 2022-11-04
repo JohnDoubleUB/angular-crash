@@ -4,6 +4,8 @@
     <!--
         Now that btnClick is an event emitter we can call something else here, this component can now be used in various 
         places because we can easily define color, text and the method it is supposed to call
+
+        We've changed the button so color and text changes based on component variable showAddTask
     -->
-     <app-button color="green" text="Add" (btnClick)="toggleAddTask()"></app-button>
+     <app-button color="{{showAddTask ? 'red' : 'green' }}" text="{{showAddTask ? 'Close' : 'Add'}}" (btnClick)="toggleAddTask()"></app-button>
 </header>

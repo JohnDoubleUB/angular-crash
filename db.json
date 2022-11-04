@@ -10,7 +10,7 @@
       "id": 2,
       "text": "Meeting at School",
       "day": "May 6th at 1:30pm",
-      "reminder": true
+      "reminder": false
     },
     {
       "id": 3,
@@ -19,8 +19,8 @@
       "reminder": false
     },
     {
-      "text": "Test Task",
-      "day": "Today",
+      "text": "bbb",
+      "day": "asgasg",
       "reminder": true,
       "id": 4
     }

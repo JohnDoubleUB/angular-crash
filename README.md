@@ -96,6 +96,10 @@ if we just want to send our events arguments perhaps because we don't have acces
     <!-- $event because we don't have access to task here -->
     <app-add-task (onAddTask)="addTask($event)"></app-add-task>
 
+If say we want to then set somethings visibility based on a condition, we can use ngIf, which we can use on a tag inline like so, putting this as a tag on the object:
+
+    *ngIf="showAddTask"
+
 ### DOM events (for binding functionality)
 Useful list because we can tap into all these events:
 https://www.w3schools.com/jsref/dom_obj_event.asp
@@ -300,3 +304,56 @@ And then in the form we can do this, We are using [()] because we want to define
     <input type="text" name="text" id="text" placeholder="Add Task" [(ngModel)]="text"> 
 
 "text" refering to a component variable, you supposedly also need a name attribute storing this same value for it to work, hence that name="text"
+
+### Passing references around
+passing references around can be a bit confusing, this is what is refered to as "Prop Drilling" in react
+
+### Using subjects
+Subjects are a certain type of observable:
+https://ncjamieson.com/understanding-subjects/
+
+it involves taking the notifications from a single source observable and forwarding them to one or more destination observers
+
+So when the Add button is clicked we have an observable which propigates this?
+
+We added ui.service for this purpose, you essentially include Observable and Subjects, define the subject and any other stuff you need, in this case a boolean.
+Then you simply create essentially an event to subscribe to and anything that cares then subscribes to this.
+It looks like this:
+
+    //Call this when we click it
+    toggleAddTask(): void
+    {
+        this.showAddTask = !this.showAddTask;
+        this.subject.next(this.showAddTask); //This will pass the task
+    }
+
+    //Use this to bind to wherever we care about
+    onToggle(): Observable<any>
+    {
+        return this.subject.asObservable();
+    }
+
+and because we are using rxjs we also need to import {Subscription} wherever we want to subscribe to these events.
+
+a subscription would look like this:
+
+    export class HeaderComponent implements OnInit {
+        title: string = 'Task Tracker';
+        showAddTask: boolean = false; //This will be used to change the button text and color
+        subscription: Subscription;
+
+        constructor(private uiService: UiService) { } //Include the UiService
+
+        /**This is what you want to use most of the time when initializing code
+        * when a component loads, or when you want to make a http request
+        * **/
+        ngOnInit(): void {
+        //We want to subscribe to this
+        this.subscription = this.uiService
+            .onToggle()
+            .subscribe((value) => this.showAddTask = value)
+        }
+    }
+
+### Implementing Routing
+So you can choose this when you initially setup the project but you can also do this to add it:
