@@ -1,5 +1,7 @@
 <div class="container">
   <app-header></app-header>
-  <app-tasks></app-tasks>
+  <!-- Doing this means we refer to the route rather than directly to the component, this binding means we can have other things on this single page! -->
+  <router-outlet></router-outlet>
+  <app-footer></app-footer>
 </div>
 
