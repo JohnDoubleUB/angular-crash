@@ -277,6 +277,7 @@ To do this we need to include a new module in app.module.ts:
 and then include it in the modules list too as an import like we did with font awesome. This will let us use the ngModel directive
 
 And then in the form we can do this, We are using [()] because we want to define a two way data binding:
+
     <input type="text" name="text" id="text" placeholder="Add Task" [(ngModel)]="text"> 
 
 "text" refering to a component variable, you supposedly also need a name attribute storing this same value for it to work, hence that name="text"
