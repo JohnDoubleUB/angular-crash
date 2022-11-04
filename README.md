@@ -57,9 +57,11 @@ You can essentially use [] for directives and there are also certain thing like 
     <app-task-item *ngFor="let task of tasks" [task]="task"></app-task-item> 
 
 [ngStyle] lets you inline declare styling? I'm not sure this is good practice but you can:
+    
     <tag [ngStyle]="{'color': 'red'}"> </tag>
 
 using variables from the component in standard tags requires {{}} so for a variable declared in the component as "name":
+    
     <h2>{{name}}</h2>
 
 [task] allowing you to essentially refer to that variable inside of that object and give it as a parameter similarly to how described below
@@ -67,12 +69,14 @@ using variables from the component in standard tags requires {{}} so for a varia
 There are Input and Output modules
 
 Input allows a angular component to accept inputs the same way you would in react essentially:
+    
     <tagname inputName="inputData"></tagname>
 
 where you can then accept that in the constructor using:
     @Input() inputName: string; after an import
 
 You can also setup Event emitters so you can respond to events from other objects:
+    
     <app-button (btnClick)="toggleAddTask()">
 
 where btnClick is defined inside app-button component as:
@@ -82,11 +86,13 @@ which can then be called somewhere using
     this.btnClick.emit();
 
 This can let you set conditional class styling, so in this case if task.reminder is true, reminder class is applied
+    
     [ngClass]="{reminder: task.reminder}"
 
 You can handle submitting of forms in form tags using (ngSubmit) this will allow us to nicely handle the form and do things without having to worry about defaults etc
 
 if we just want to send our events arguments perhaps because we don't have access to the data at that given level, we can do $event in the arguments:
+    
     <!-- $event because we don't have access to task here -->
     <app-add-task (onAddTask)="addTask($event)"></app-add-task>
 
@@ -101,6 +107,7 @@ See the services folder for more implementation details of this
 ### What is a http header?
 An HTTP header is a field of an HTTP request or response that passes additional context and metadata about the request or response
 we need one for the update request or rather known as 'put', we're using it in several places so we do this:
+    
     const httpOptions = {
     headers: new HttpHeaders({
         'Content-Type' : 'application/json'
@@ -109,6 +116,7 @@ we need one for the update request or rather known as 'put', we're using it in s
 
 ### For this project to work:
 please run both commands:
+    
     ng serve
     npm run server
 
@@ -117,14 +125,17 @@ This will ensure that both the site is running and the mock server for it
 ### Useful commands
 
 #### Create a new component:
+    
     ng generate component componentFolder/componentName
 
 #### Serve your site (so you can see it):
+    
     ng serve
 
 then you can use ctl + c to end the process on that terminal
 
 #### Create a service:
+    
     ng generate service serviceFolder/serviceName
 
 #### Adding font-awesome:
@@ -133,9 +144,11 @@ can be easily done by following instructions here: https://github.com/FortAwesom
 ### Using a service (Front-end)
 
 In order to use a service it needs to be imported but also registered as a provider in the constructor, so for an import of:
+    
     import { TaskService } from '../../services/task.service'
 
 in the constructor of our class:
+    
     @Component({
     selector: 'app-tasks',
     templateUrl: './tasks.component.html',
@@ -152,6 +165,7 @@ the constructor part includes this service
 just below the constructor if you wanted to store this data from the service you could do the following in the ngOnInt() function (default init funciton of the component on creation)
 
 this could look like the following:
+    
     ngOnInit(): void {
         this.tasks = this.taskService.getTasks(); //We aren't using observables yet? 
         //This is usually not how you'd want to do this, you'd want to use observables if you're using asyncronous data
@@ -211,6 +225,7 @@ All the info is on the link for the package, but then you can make GET, POST, PU
 
 Under package.json "scripts":
 add:
+    
     "server": "json-server --watch db.json --port 5000"
 
 that will essentially be our database server (for testing these things atleast)
@@ -221,14 +236,17 @@ Now to run it we just call (because we called it "server" in scripts): npm run s
 
 ### Switching to the httpclient to use this mock server
 So angular actually has its own httpclient, so we'll use that
+    
     import {HttpClient, HttpHeaders} from '@angular/common/http';
 
 This will allow us to make our requests
 
 We will also have to add this to our component as a module so we can use it
+    
     app.module.ts
 
 This is where all our components are also registered, one unified place, which is also why we don't have to do as much importing as in React
+    
     import { HttpClientModule } from '@angular/common/http'; //We add this so we can do the http client stuff in our project
 
 then make sure to include that in the imports with our other stuff:
@@ -272,6 +290,7 @@ Then in the service itself we just need to make sure we know the url for the api
 So in the case of forms, we might want to bind the fields two way (so it can be set through code or set through changes to the fields).
 
 To do this we need to include a new module in app.module.ts:
+    
     import { FormsModule } from '@angular/forms';
 
 and then include it in the modules list too as an import like we did with font awesome. This will let us use the ngModel directive
