@@ -9,6 +9,7 @@ import { TaskItemComponent } from './components/task-item/task-item.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { HttpClientModule } from '@angular/common/http';
 import { AddTaskComponent } from './components/add-task/add-task.component'; //We add this so we can do the http client stuff in our project
+import { FormsModule } from '@angular/forms'; //So we can two way bind fields
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { AddTaskComponent } from './components/add-task/add-task.component'; //W
   imports: [
     BrowserModule,
     FontAwesomeModule,
-    HttpClientModule //Here it is added to this too!
+    HttpClientModule, //Here it is added to this too!
+    FormsModule //Added here also
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -84,6 +84,12 @@ which can then be called somewhere using
 This can let you set conditional class styling, so in this case if task.reminder is true, reminder class is applied
     [ngClass]="{reminder: task.reminder}"
 
+You can handle submitting of forms in form tags using (ngSubmit) this will allow us to nicely handle the form and do things without having to worry about defaults etc
+
+if we just want to send our events arguments perhaps because we don't have access to the data at that given level, we can do $event in the arguments:
+    <!-- $event because we don't have access to task here -->
+    <app-add-task (onAddTask)="addTask($event)"></app-add-task>
+
 ### DOM events (for binding functionality)
 Useful list because we can tap into all these events:
 https://www.w3schools.com/jsref/dom_obj_event.asp
@@ -261,3 +267,17 @@ Then in the service itself we just need to make sure we know the url for the api
         //Added triangle brackets to fix the issue with the returned type not being of Task
         return this.http.get<Task[]>(this.apiUrl); //This is the new line that actually gets data from the server
     }
+
+### Setting up two way binding for inputs
+So in the case of forms, we might want to bind the fields two way (so it can be set through code or set through changes to the fields).
+
+To do this we need to include a new module in app.module.ts:
+    import { FormsModule } from '@angular/forms';
+
+and then include it in the modules list too as an import like we did with font awesome. This will let us use the ngModel directive
+
+And then in the form we can do this:
+    <!-- We are using [()] because we want to define a two way data binding -->
+    <input type="text" name="text" id="text" placeholder="Add Task" [(ngModel)]="text"> 
+
+"text" refering to a component variable, you supposedly also need a name attribute storing this same value for it to work, hence that name="text"
