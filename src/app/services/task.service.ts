@@ -7,6 +7,12 @@ import { Task } from '../Task';
 import { TASKS } from '../mock-tasks'; //We don't need this anymore for testing
 import { Observable, of } from 'rxjs'; //Adding observables, we also don't neccesarily need of as we aren't faking the data now
 
+//Header settings, so we can send the relevant additional data with requests
+const httpOptions = {
+  headers: new HttpHeaders({
+    'Content-Type' : 'application/json'
+  })
+}
 
 @Injectable({
   providedIn: 'root'
@@ -32,4 +38,12 @@ export class TaskService {
     const url = `${this.apiUrl}/${task.id}`
     return this.http.delete<Task>(url); 
   }
+
+  //Add this call so we update existing tasks to set reminder
+  updateTaskReminder(task: Task): Observable<Task>
+  {
+    const url = `${this.apiUrl}/${task.id}`
+    return this.http.put<Task>(url, task, httpOptions); //httpOptions to make sure we're sending the right content type
+  }
+
 }

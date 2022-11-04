@@ -12,6 +12,7 @@ export class TaskItemComponent implements OnInit {
   faTimes = faTimes; //Adding in font awesome
   //Which we did by following instructions here: https://github.com/FortAwesome/angular-fontawesome
   @Output() onDeleteTask : EventEmitter<Task> = new EventEmitter();
+  @Output() onToggleReminder : EventEmitter<Task> = new EventEmitter();
 
   constructor() { }
 
@@ -23,4 +24,8 @@ export class TaskItemComponent implements OnInit {
     this.onDeleteTask.emit(task);
   }
 
+  onToggle(task: Task) 
+  {
+    this.onToggleReminder.emit(task);
+  }
 }

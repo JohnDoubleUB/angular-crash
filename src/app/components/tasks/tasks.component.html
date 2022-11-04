@@ -8,4 +8,4 @@
 <!-- <p *ngFor="let task of tasks">{{task.text}}</p> -->
 <!-- This is what we'll be doing instead-->
 <!-- This auto updates when the variable does-->
-<app-task-item *ngFor="let task of tasks" [task]="task" (onDeleteTask)="deleteTask(task)"></app-task-item> 
+<app-task-item *ngFor="let task of tasks" [task]="task" (onDeleteTask)="deleteTask(task)" (onToggleReminder)="toggleReminder(task)"></app-task-item> 

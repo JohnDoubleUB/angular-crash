@@ -81,6 +81,26 @@ where btnClick is defined inside app-button component as:
 which can then be called somewhere using
     this.btnClick.emit();
 
+This can let you set conditional class styling, so in this case if task.reminder is true, reminder class is applied
+    [ngClass]="{reminder: task.reminder}"
+
+### DOM events (for binding functionality)
+Useful list because we can tap into all these events:
+https://www.w3schools.com/jsref/dom_obj_event.asp
+
+
+### Different Request Types
+See the services folder for more implementation details of this
+
+### What is a http header?
+An HTTP header is a field of an HTTP request or response that passes additional context and metadata about the request or response
+we need one for the update request or rather known as 'put', we're using it in several places so we do this:
+    const httpOptions = {
+    headers: new HttpHeaders({
+        'Content-Type' : 'application/json'
+    })
+    }
+
 ### For this project to work:
 please run both commands:
     ng serve
