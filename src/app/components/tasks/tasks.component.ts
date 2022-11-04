@@ -22,5 +22,14 @@ export class TasksComponent implements OnInit {
   }
 
   //create a service using angular by calling: ng generate service services/task
+  deleteTask(task: Task)
+  { 
+    console.log(task);
+    this.taskService.deleteTask(task)
+    .subscribe(() => 
+    {
+      this.tasks = this.tasks.filter(t => t.id !== task.id); //Using filter to then remove this result locally
+    });
+  }
 
 }
